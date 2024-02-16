@@ -14,7 +14,7 @@
 
 <PageTitle>Intro App</PageTitle>
 
-@code{
+@code {
     protected override void OnInitialized()
     {
         // the user must be logged in
@@ -42,16 +42,23 @@
 <div class="container-fluid d-flex align-items-center justify-content-center creds-frm-wrapper">
     <div class="row">
         <div style="padding: 4rem;">
-            <p style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;"><span style="font-size: 1.4rem; font-weight: 700!important;">Welcome to Dr. Parr's <br /> My4Blocks Mental Health App</span></p>
-            <p style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">Before you jump in to managing <br /> Anger, Anxiety, Depression & Guilt...</p>
+            <p
+                style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">
+                <span style="font-size: 1.4rem; font-weight: 700!important;">Welcome to Dr. Parr's <br /> My4Blocks
+                    Mental Health App</span></p>
+            <p
+                style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">
+                Before you jump in to managing <br /> Anger, Anxiety, Depression & Guilt...</p>
             <br /><br />
-            <button style="border: none!important; outline: none!important; box-shadow: none!important; padding: 8px!important; background: #d752d7!important; color: #fff;" class="rounded-3" @onclick="@(() => GoToIntroApp())">
+            <button
+                style="border: none!important; outline: none!important; box-shadow: none!important; padding: 8px!important; background: #d752d7!important; color: #fff;"
+                class="rounded-3" @onclick="@(() => GoToIntroApp())">
                 You must first learn your ABC's! <br /> CLICK HERE TO BEGIN
             </button>
         </div>
     </div>
 
     <div class="row bg-light" style="max-width: 450px!important; margin-top: 3rem!important; padding: 0px!important;">
-        <img src="/assets/images/cropped bar with formulas.png"/>
+        <img src="/assets/images/cropped bar with formulas.png" />
     </div>
 </div>

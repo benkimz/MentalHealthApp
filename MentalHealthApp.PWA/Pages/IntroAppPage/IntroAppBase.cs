@@ -19,6 +19,7 @@ namespace MentalHealthApp.PWA.Pages.IntroAppPage
                 if (JSRuntime is not null)
                 {
                     await JSRuntime.InvokeVoidAsync("authPages.setTitle", "Intro App");
+                    await JSRuntime.InvokeVoidAsync("app.theme.initializeAppTheme", "dark-root");
                 }
             }
         }
