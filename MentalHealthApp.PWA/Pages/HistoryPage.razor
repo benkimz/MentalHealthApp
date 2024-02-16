@@ -46,7 +46,7 @@
                     foreach (var item in log)
                     {
                         <MentalHealthApp.PWA.Components.EmotionLogComponent Prompt="@item.Value" Content="@item.Key?.Content"
-                            CreatedDateTime="@item.Key?.CreatedDateTimeUTC" />
+                            CreatedDateTime="@TokenManager.GetTimeElapsed(item.Key?.CreatedDateTimeUTC ?? DateTime.UtcNow.AddYears(-1200))" />
                     }
                 }
             }

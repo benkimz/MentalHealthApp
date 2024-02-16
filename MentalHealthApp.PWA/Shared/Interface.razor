@@ -18,7 +18,7 @@
 
                     <ContentHeadLine ContentStep="@(targetContent?.Step ?? 0)" ContentTitle="@targetContent?.Title" />
 
-                    <VideoIframe VideoUrl="@targetContent?.VideoUrl" VideoName="@targetContent?.VideoName"
+                    <VideoIframe VideoUrl="@targetContent?.VideoUrl?.Trim()" VideoName="@targetContent?.VideoName"
                         ContentStep="@(targetContent?.Step ?? 0)" />
 
                     <ContentTextBody TextBody="@targetContent?.Body" />

@@ -101,6 +101,11 @@ namespace MentalHealthApp.PWA.Shared.ContentInterface
             StateHasChanged();
         }
 
+        public static bool IsValidUrl(string? url)
+        {
+            return (!string.IsNullOrEmpty(url) && !string.IsNullOrWhiteSpace(url));
+        }
+
         protected string EmotionLogInput { get; set; } = string.Empty;
         protected void EnterEmotionLog(string e) { EmotionLogInput = e; }
         protected async void SaveUserLog(string promptKey)

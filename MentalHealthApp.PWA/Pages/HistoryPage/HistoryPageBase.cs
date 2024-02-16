@@ -4,6 +4,7 @@ using MentalHealthApp.PWA.Data.Enums;
 using MentalHealthApp.PWA.Services.Interfaces;
 using MentalHealthApp.PWA.Services.Singleton;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace MentalHealthApp.PWA;
 
@@ -17,6 +18,8 @@ public class HistoryPageBase : ComponentBase
     private ICookieAccess? CookieAccess { get; set; }
     [Inject]
     private NavigationManager? NavigationManager { get; set; }
+    [Inject]
+    private IJSRuntime? JSRuntime { get; set; }
 
     [Parameter]
     public string? category { get; set; }
@@ -85,4 +88,36 @@ public class HistoryPageBase : ComponentBase
             StateHasChanged();
         }
     }
+
+    // private long SecondsTimestamp(DateTime dateTime) => new DateTimeOffset(dateTime).ToUnixTimeSeconds();
+
+    // public string GetTimeElapsed(DateTime dateTime)
+    // {
+    //     long timestamp = SecondsTimestamp(dateTime);
+    //     long now = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+    //     long secondsElapsed = now - timestamp;
+
+    //     var intervals = new[]
+    //     {
+    //     new { Label = "year", Seconds = 31536000 },
+    //     new { Label = "month", Seconds = 2592000 },
+    //     new { Label = "week", Seconds = 604800 },
+    //     new { Label = "day", Seconds = 86400 },
+    //     new { Label = "hour", Seconds = 3600 },
+    //     new { Label = "minute", Seconds = 60 }
+    // };
+
+    //     foreach (var interval in intervals)
+    //     {
+    //         long elapsed = secondsElapsed / interval.Seconds;
+
+    //         if (elapsed >= 1)
+    //         {
+    //             return elapsed == 1 ? $"{elapsed} {interval.Label} ago" : $"{elapsed} {interval.Label}s ago";
+    //         }
+    //     }
+
+    //     return "Just now";
+    // }
+
 }

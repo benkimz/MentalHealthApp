@@ -61,12 +61,12 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
 
         public Task<IEnumerable<UserEmotionLog>?> GetUserEmotionLogs(string userId)
         {
-            return Task.FromResult(_context.UserEmotionLogs.Where(l => l.UserId == userId).AsEnumerable() ?? null);
+            return Task.FromResult(_context.UserEmotionLogs.Where(l => l.UserId == userId).OrderByDescending(h => h.CreatedDateTimeUTC).AsEnumerable() ?? null);
         }
 
         public Task<List<Dictionary<UserEmotionLog, string>>?> GetUserEmotionLogsByCategory(string userId, ContentCategory contentCategory)
         {
-            var query = from el in _context.UserEmotionLogs.Where(q => q.UserId == userId && q.VideoCategory == contentCategory)
+            var query = from el in _context.UserEmotionLogs.Where(q => q.UserId == userId && q.VideoCategory == contentCategory).OrderByDescending(h => h.CreatedDateTimeUTC)
                         join v in _context.Videos on el.VideoId equals v.Id
                         select new
                         {

@@ -32,7 +32,8 @@
                         <a class="nav-link active text-secondary fw-bold" aria-current="page"
                             href="@($"history/{log?.VideoCategory.ToString().ToLower()}")">
                             <i class="fa fa-paperclip m-3"></i>
-                            @log?.VideoCategory.ToString() - @log?.CreatedDateTimeUTC.ToString("dd/mm/yyyy hh:mm tt")
+                            @log?.VideoCategory.ToString() - @TokenManager.GetTimeElapsed(log?.CreatedDateTimeUTC ??
+                    DateTime.UtcNow.AddYears(-1200))
                         </a>
                     </li>
                 }

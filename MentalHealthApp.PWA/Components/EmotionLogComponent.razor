@@ -10,7 +10,7 @@
             </p>
             <p class="text-sm text-secondary">
                 <span class="op-6">Posted on </span>
-                <a class="text-black">@CreatedDateTime?.ToString("dd/mm/yyyy hh:mm tt")</a>
+                <a class="text-black">@CreatedDateTime</a>
             </p>
         </div>
     </div>
@@ -22,5 +22,5 @@
     [Parameter]
     public string? Content { get; set; }
     [Parameter]
-    public DateTime? CreatedDateTime { get; set; }
+    public string? CreatedDateTime { get; set; }
 }
