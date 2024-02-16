@@ -1,0 +1,16 @@
+.navbar {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    color: oldlace;
+    box-shadow: 0 0 0 0.1rem #181921;
+}
+.nav-item {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+    color: oldlace;
+}
+
+.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: #1C2329 !important;
+}

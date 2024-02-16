@@ -1,0 +1,46 @@
+﻿@using System.Reflection
+
+@inherits ContentInterface.InterfaceBase
+
+@using MentalHealthApp.PWA.Shared.ContentInterface.Components
+
+
+<div id="app-interface" class="d-flex align-items-center justify-content-center">
+    <div class="row d-flex align-items-center justify-content-center">
+
+        <div class="content-nav col-sm-4 col-md-2 col-lg-2 order-2 order-sm-2">
+            <button @onclick="GoToPrevious">&lt; back</button>
+        </div>
+
+        <div class="col-sm-12 col-md-8 col-lg-8 order-1 order-md-2">
+            <div class="row d-flex align-items-center justify-content-center flex-lg-row-reverse">
+                <div class="video-content col-md-8 col-lg-8 mx-auto">
+
+                    <ContentHeadLine ContentStep="@(targetContent?.Step ?? 0)" ContentTitle="@targetContent?.Title" />
+
+                    <VideoIframe VideoUrl="@targetContent?.VideoUrl" VideoName="@targetContent?.VideoName"
+                        ContentStep="@(targetContent?.Step ?? 0)" />
+
+                    <ContentTextBody TextBody="@targetContent?.Body" />
+
+                    @if (targetContent is not null)
+                    {
+                        Dictionary<string, string> prompts = targetContent.Prompts();
+                        foreach (var item in prompts)
+                        {
+                            <UserInput Placeholder="@item.Value" PromptKey="@item.Key" OnSave="SaveUserLog"
+                                OnInput="EnterEmotionLog" />
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="content-nav col-sm-4 col-md-2 col-lg-2 order-last">
+            <button @onclick="GoToNext">next &gt;</button>
+        </div>
+
+    </div>
+
+</div>

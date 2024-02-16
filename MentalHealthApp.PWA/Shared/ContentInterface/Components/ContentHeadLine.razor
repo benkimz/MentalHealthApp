@@ -1,0 +1,19 @@
+﻿@inherits ContentInterface.BaseClasses.ContentHeadLineBase
+
+<div class="headline">
+    <div class="step-tag-title">
+        <div>step<br />
+            @(ContentStep > 10 ? ContentStep.ToString() : $"#0{ContentStep}")
+        </div>
+        <h3 style="margin-left: 10px!important;">
+
+            @ContentTitle
+
+        </h3>
+    </div>
+
+    <div style="font-size: 14px;">
+        <i class="fas fa-book"></i> <br />
+        <small style="font-size: 12px;">Reading & Exercises</small>
+    </div>
+</div>

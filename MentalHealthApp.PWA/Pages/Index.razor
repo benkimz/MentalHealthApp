@@ -1,0 +1,67 @@
+﻿@page "/"
+
+@using MentalHealthApp.PWA.Models;
+@using MentalHealthApp.PWA.Services.Interfaces;
+
+@inject NavigationManager NavManager
+
+@inject IJSRuntime JSRuntime
+
+@inject ICookieAccess CookieAccess
+
+@* @inject ITestSuiteDBFiller testSuite *@
+
+<PageTitle>Mental Health App</PageTitle>
+
+<h1 id="index-headline" class="p-5 m-0 text-light"
+    style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight:600!important;font-size:2.6rem;">What
+    are you feeling today? </h1>
+
+<div class="container-fluid px-5 m-0 d-flex align-items-center justify-content-center flex-column">
+    <div class="row w-100 p-0 m-0">
+        <div class="col-sm-6 mb-3 mb-sm-0 p-3">
+            <a href="#" class="nav-link home-button anger-btn m-0 p-4" @onclick='() => Redirect("anger")'>
+                Anger
+            </a>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0 p-3">
+            <a href="#" class="nav-link home-button anxiety-btn m-0 p-4" @onclick='() => Redirect("anxiety")'>
+                Anxiety
+            </a>
+        </div>
+    </div>
+
+    <div class="row w-100 p-0 m-0">
+        <div class="col-sm-6 mb-3 mb-sm-0 p-3">
+            <a href="#" class="nav-link home-button depress-btn m-0 p-4" @onclick='() => Redirect("depression")'>
+                Depression
+            </a>
+        </div>
+        <div class="col-sm-6  p-3">
+            <a href="#" class="nav-link home-button guilt-btn m-0 p-4" @onclick='() => Redirect("guilt")'>
+                Guilt
+            </a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private async void Redirect(string route)
+    {
+        await JSRuntime.InvokeVoidAsync("app.sounds.blockTypeButton.sonicFeedback");
+        NavManager.NavigateTo(route);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("app.theme.initializeAppTheme");
+        }
+    }
+
+    @* protected override void OnInitialized()
+{
+testSuite.LoadDB();
+} *@
+}

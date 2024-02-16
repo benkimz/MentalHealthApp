@@ -1,0 +1,82 @@
+﻿@using MentalHealthApp.PWA.Services.Interfaces;
+@using MentalHealthApp.PWA.Services.Singleton;
+
+@inject ICookieAccess _cookies
+
+@inject NavigationManager NavManager
+
+@inject IJSRuntime JSRuntime
+
+@inject TokenManager TokenManager
+
+@code {
+    private bool IsLoggedIn { get; set; }
+
+    protected override void OnInitialized()
+    {
+        IsLoggedIn = TokenManager.User != null;
+    }
+
+
+    private async void ToggleLoginStatus()
+    {
+        if (!IsLoggedIn)
+        {
+            NavManager.NavigateTo("login");
+        }
+        else
+        {
+            TokenManager.User = null;
+            await JSRuntime.InvokeVoidAsync("BrowserData.DeleteCookie", "token");
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+    }
+
+    private async void ToggleTheme()
+    {
+        await JSRuntime.InvokeVoidAsync("app.theme.toggle");
+        await JSRuntime.InvokeVoidAsync("location.reload");
+    }
+}
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <i id="tgl-btn" class="fa fa-bars text-light" style="font-size: 25px!important;"></i>
+</button>
+<div class="collapse navbar-collapse justify-content-end flex-lg-wrap flex-lg-fill" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link top-menu-item" href="#" onclick="@(async () => ToggleLoginStatus())">
+                @(IsLoggedIn ? "Log Out" : "Login")
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link top-menu-item" href="intro">Intro App</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link top-menu-item" href="Register">Register</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <svg id="top-nav-tgl" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                </svg>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#" role="button">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a class="dropdown-item" href="#" role="button" @onclick="ToggleTheme">
+                    <i id="uxt" class="fas fa-moon"></i> Theme
+                </a>
+                <a class="dropdown-item" href="history" role="button">
+                    <i class="fas fa-history"></i> History
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

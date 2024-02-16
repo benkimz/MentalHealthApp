@@ -1,0 +1,59 @@
+﻿@using MentalHealthApp.PWA.Services.Interfaces;
+
+@inject ICookieAccess _cookies
+
+@inject NavigationManager NavManager
+
+@inject IJSRuntime JSRuntime
+
+@code{
+    private bool IsLoggedIn { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = await _cookies.GetAppUser();
+        IsLoggedIn = user != null;
+    }
+
+
+    private async void ToggleLoginStatus()
+    {
+        if (!IsLoggedIn)
+        {
+            NavManager.NavigateTo("login");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("BrowserData.DeleteCookie", "token");
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+    }
+
+    private async void ToggleTheme()
+    {
+        await JSRuntime.InvokeVoidAsync("app.theme.toggle");
+        await JSRuntime.InvokeVoidAsync("location.reload");
+    }
+}
+
+<nav id="app-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a id="logo-link" class="navbar-brand" href="#">
+        <img src="assets/images/Full-Color/White-Font/M4B_LOGO1_White.png" style="height:50px;" />
+    </a>
+    <TopListMenu />
+</nav>
+
+<style>
+    #app-bar{
+        height: 60px!important;
+    }
+    #app-bar:has(#navbarNavDropdown.show) {
+        height: auto!important;
+    }
+
+    #app-bar > .navbar-toggler {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+</style>

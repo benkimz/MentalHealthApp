@@ -1,0 +1,6 @@
+icon-192.png
+icon-512.png
+index.html
+manifest.json
+service-worker.js
+service-worker.published.js

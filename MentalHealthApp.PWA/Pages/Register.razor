@@ -1,0 +1,111 @@
+﻿@page "/Register"
+
+@layout AuthLayout
+
+@inherits RegisterPage.RegisterBase
+
+<PageTitle>Sign Up</PageTitle>
+
+<div class="container-fluid d-flex align-items-center justify-content-center creds-frm-wrapper">
+    <div class="row">
+        <div style="padding: 4rem;">
+            <p style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">Control Anger, Anxiety, Depression & Guilt</p>
+            <p style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">with this <span style="font-size: 1.4rem; font-weight: 700!important;">Simple & Effective</span> Therapy Tool</p>
+            <p style="font-size: 1.2rem!important; font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;">Create an account to access <br /> Dr. Parr's App For Free</p>
+
+            <img src="assets/images/Full-Color/White-Font/M4B_LOGO2_White.png" style="height:150px;" />
+        </div>
+    </div>
+
+    <div id="data-form" class="row bg-light rounded-3" style="max-width: 500px!important; margin-top: 3rem!important;">
+        <div class="form-row">
+            <div class="form-group col-md-6 frm-group mt-3 mb-2">
+                <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text frm-input-group-txt">
+                            <i class="fas fa-user frm-input-group-icon"></i>
+                        </span>
+                    </div>
+                    <div class="form-floating m-0 w-100" style="background: none!important;">
+                        <input type="text" class="form-control frm-control" id="firstName" placeholder="FirstName" @bind-value="FirstName">
+                        <label for="firstName" class="frm-label d-flex align-items-center justify-content-center">Firstname*</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 frm-group mt-3 mb-2">
+                <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text frm-input-group-txt">
+                            <i class="fas fa-user frm-input-group-icon"></i>
+                        </span>
+                    </div>
+                    <div class="form-floating m-0 w-100" style="background: none!important;">
+                        <input type="text" class="form-control frm-control" id="lastName" placeholder="LastName" @bind-value="LastName">
+                        <label for="lastName" class="frm-label d-flex align-items-center justify-content-center">Lastname*</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group frm-group mt-3 mb-2">
+            <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text frm-input-group-txt">
+                        <i class="fas fa-envelope frm-input-group-icon"></i>
+                    </span>
+                </div>
+                <div class="form-floating m-0 w-100" style="background: none!important;">
+                    <input type="email" class="form-control frm-control" id="email" placeholder="someone@server.com" @bind-value="Email">
+                    <label for="email" class="frm-label d-flex align-items-center justify-content-center">Email*</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group frm-group mt-3 mb-2">
+            <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text frm-input-group-txt">
+                        <i class="fas fa-lock frm-input-group-icon"></i>
+                    </span>
+                </div>
+                <div class="form-floating m-0 w-100" style="background: none!important;">
+                    <input type="password" class="form-control frm-control" id="password" placeholder="********" @bind-value="Password">
+                    <label for="password" class="frm-label d-flex align-items-center justify-content-center">Password*</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group frm-group mt-3 mb-2">
+            <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text frm-input-group-txt">
+                        <i class="fas fa-lock frm-input-group-icon"></i>
+                    </span>
+                </div>
+                <div class="form-floating m-0 w-100" style="background: none!important;">
+                    <input type="password" class="form-control frm-control" id="cpassword" placeholder="********" @bind-value="ConfirmPassword">
+                    <label for="cpassword" class="frm-label d-flex align-items-center justify-content-center">Confirm Password*</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group frm-group mt-3 mb-2">
+            <div class="input-group frm-input-group w-100 d-flex align-items-center justify-content-center flex-nowrap p-0 m-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text frm-input-group-txt">
+                        <i class="fas fa-phone frm-input-group-icon"></i>
+                    </span>
+                </div>
+                <div class="form-floating m-0 w-100" style="background: none!important;">
+                    <input type="text" class="form-control frm-control" id="phone" placeholder="+1 XX XXXX XX" @bind-value="PhoneNumber">
+                    <label for="phone" class="frm-label d-flex align-items-center justify-content-center">Phone Number</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" style="background: #002363!important; outline: none!important; border: none!important; box-shadow: none!important; width: 100%!important; max-width: 95%!important; margin: 5px!important;" @onclick="RegisterUser">Sign Up</button>
+
+        <p style="margin: 4px!important;"><a href="/login" id="alt-link" class="link-dark link-offset-2 link-underline-opacity-100-hover" style="text-decoration: none!important; font-size: 12px!important;">Existing Users Login Here</a></p>
+    </div>
+</div>

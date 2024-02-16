@@ -1,0 +1,282 @@
+﻿html, body {
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: hidden !important;
+    overflow-y: auto !important;
+    background: none!important;
+}
+
+.navbar-nav .dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+}
+
+#uxt.fa-sun {
+    color: #c7c710 !important;
+}
+
+#navbarNavDropdown > .navbar-nav > .nav-item > .nav-link {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    color: #fff;
+}
+
+#navbarNavDropdown > .navbar-nav > .nav-item > .nav-link:hover {
+    background: #313131 !important;
+}
+
+.home-button {
+    font-size: 4vw;
+    background-color: #E1674F;
+    border: solid white 2px;
+    padding: 3rem 0;
+    border-radius: 1.2rem;
+    margin: 0.3rem;
+    text-decoration: none;
+    color: #ffffff !important;
+}
+
+.light-dom-root {
+    background: #e5e5e5!important;
+}
+.dark-dom-root {
+    background: #1a355b!important;
+}
+
+.app-bar-light{
+    background: #1a355b!important;
+}
+
+.anger-btn {
+    background-color: #E1674F;
+}
+
+.anger-txt {
+    color: #E1674F !important;
+}
+
+.anxiety-btn {
+    background-color: #33755A;
+}
+
+.anxiety-txt {
+    color: #33755A !important;
+}
+
+.depress-btn {
+    background-color: #1C3F4E;
+}
+
+.depress-txt {
+    color: #1C3F4E !important;
+}
+
+.guilt-btn {
+    background-color: #C5995B;
+}
+
+.guilt-txt {
+    color: #C5995B !important;
+}
+
+#iframe {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+form-group {
+    color: black !important;
+}
+
+
+#logo-link {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+    #logo-link > div {
+        word-wrap: break-word !important;
+    }
+
+.light-theme {
+    background: #ffffff !important;
+}
+
+/* new app interface */
+#app-interface {
+    padding: 15px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    border: none !important;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+/*#app-interface >> */
+.content-nav {
+    width: 100% !important;
+    max-width: 70px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    background: blue !important;
+    border: none !important;
+}
+
+/*#app-interface >> */
+.content-nav > button {
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    height: 30px !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #10776e !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+/*#app-interface >> */
+.video-content {
+    /*width: 100% !important;*/
+    height: 100% !important;
+    padding: 5px !important;
+    background: #0b1527 !important;
+    overflow: hidden !important;
+    border: none !important;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    border-radius: 20px !important;
+    -webkit-border-radius: 10px !important;
+    justify-content: center;
+    -webkit-justify-content: center;
+    border: none !important;
+}
+/* new app interface */
+
+.headline {
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    border: none !important;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.step-tag-title {
+    padding: 10px !important;
+    margin: 0px !important;
+    border: none !important;
+    width: 100% !important;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+    .step-tag-title > div {
+        color: #ffffff !important;
+        font-size: 14px !important;
+        font-weight: bold !important;
+        margin: 0px !important;
+        padding: 0px !important;
+        text-transform: lowercase !important;
+        line-height: 14px !important;
+    }
+
+.content-body {
+    margin: 20px !important;
+    padding: 10px !important;
+    width: 90% !important;
+    height: 100% !important;
+    max-height: 150px !important;
+    overflow: hidden !important;
+    overflow-y: auto !important;
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+    #app-interface {
+        padding: 0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+        background: #fff !important;
+    }
+}
+
+.frm-group {
+    overflow: hidden!important;
+}
+.frm-input-group {
+    padding: 0px !important;
+    border: 1px solid #3d3c3d !important;
+    border-radius: 25px !important;
+}
+.frm-input-group:has(.frm-control:focus) {
+    border: 2px solid #cb1cbe !important;
+}
+
+.frm-input-group-txt {
+    border: none !important;
+    border-radius: 25px 0px 0px 25px !important;
+    background: none !important;
+}
+.frm-input-group-icon {
+    color: purple !important;
+    font-size: 16px !important;
+}
+.frm-control {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0px 25px 25px 0px !important;
+    height: 40px!important;
+    background: none!important;
+    font-size: 0.8rem!important;
+}
+
+@media screen and (max-width: 768px){
+    .creds-frm-wrapper{
+        flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+    }
+}
+
+.frm-label {
+    color: #000;
+    font-size: 0.8rem !important;
+}
+.dark-label {
+    color: #fff;
+}
+
+.dark-nav-item{
+    color: #000!important;
+}

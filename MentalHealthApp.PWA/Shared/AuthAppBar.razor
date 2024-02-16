@@ -1,0 +1,32 @@
+﻿@inject IJSRuntime JSRuntime
+
+@code {
+    [Parameter]
+    public string? Title { get; set; }
+}
+
+<nav id="auth-app-bar" class="navbar navbar-expand-lg">
+    <a id="back-option" class="navbar-brand" href="/"
+        onclick="@(async () => await JSRuntime.InvokeVoidAsync("app.sounds.backButton.sonicFeedback"))">
+        @*back: >> javascript:history.back()*@
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <h5 id="auth-page-title">@Title</h5>
+    <TopListMenu />
+</nav>
+
+<style>
+    #back-option {
+        text-decoration: none !important;
+        color: #fff !important;
+    }
+
+    #auth-app-bar {
+        height: 60px !important;
+        box-shadow: 0px 0px 10px 0px #000 !important;
+    }
+
+    #auth-app-bar:has(#navbarNavDropdown.show) {
+        height: auto !important;
+    }
+</style>
