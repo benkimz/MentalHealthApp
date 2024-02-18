@@ -8,9 +8,13 @@
     }
 </style>
 
-<div class="row" style="width: 100%!important; padding: 0px!important;">
-    <iframe id="vid-frame" width="560" height="315" frameborder="0"
-        allow="accelerometer; encrypted-media; gyroscope; fullscreen;"></iframe>
+@if (!string.IsNullOrEmpty(VideoUrl?.Trim()) && !string.IsNullOrWhiteSpace(VideoUrl?.Trim()))
+{
+    <div class="row" style="width: 100%!important; padding: 0px!important;">
+    <iframe id="vid-frame" width="560" height="315" src="@VideoUrl" frameborder="0"
+        allow="accelerometer; encrypted-media; gyroscope; fullscreen;"
+        sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-top-navigation" loading="lazy"
+        credentialless>
+    </iframe>
 </div>
-
-@* >> src="@VideoUrl" *@
+}

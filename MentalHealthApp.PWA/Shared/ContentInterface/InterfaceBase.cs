@@ -34,11 +34,6 @@ namespace MentalHealthApp.PWA.Shared.ContentInterface
             if (firstRender && JSRuntime is not null)
             {
                 await JSRuntime.InvokeVoidAsync("app.theme.initializeAppTheme", "dark-menu-items");
-                if (JSRuntime is not null && targetContent is not null)
-                {
-                    await JSRuntime.InvokeVoidAsync("app.frames.location.replace", "vid-frame", targetContent?.VideoUrl);
-                    StateHasChanged();
-                }
             }
         }
 
@@ -72,31 +67,23 @@ namespace MentalHealthApp.PWA.Shared.ContentInterface
             }
         }
 
-        protected async void GoToPrevious()
+        protected void GoToPrevious()
         {
             if (Videos is not null)
             {
                 currentIndex = currentIndex > 0 ? currentIndex - 1 : Videos.Count() - 1;
                 targetContent = Videos.ElementAtOrDefault(currentIndex);
-                if (JSRuntime is not null)
-                {
-                    await JSRuntime.InvokeVoidAsync("app.frames.location.replace", "vid-frame", targetContent?.VideoUrl);
-                }
             }
             StateHasChanged();
         }
 
 
-        protected async void GoToNext()
+        protected void GoToNext()
         {
             if (Videos is not null)
             {
                 currentIndex = currentIndex >= Videos.Count() - 1 ? 0 : currentIndex + 1;
                 targetContent = Videos.ElementAtOrDefault(currentIndex);
-                if (JSRuntime is not null)
-                {
-                    await JSRuntime.InvokeVoidAsync("app.frames.location.replace", "vid-frame", targetContent?.VideoUrl);
-                }
             }
             StateHasChanged();
         }

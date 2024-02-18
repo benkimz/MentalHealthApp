@@ -1,23 +1,31 @@
-﻿<nav id="interface-app-bar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a id="logo-link" class="navbar-brand" href="#">
+﻿@inject IJSRuntime JSRuntime
+
+<nav id="interface-app-bar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="logo-link" class="navbar-brand" href=""
+        onclick="@(async () => await JSRuntime.InvokeVoidAsync("app.sounds.backButton.sonicFeedback"))">
+        <i class="fas fa-arrow-left"></i>
         <img src="assets/images/Full-Color/White-Font/M4B_LOGO1_White.png" style="height:50px;" />
     </a>
     <h5 style="color: #d56e6e;" id="interface-title">
-        <span id="title-section-1" style="font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;"></span>
-        <span id="title-section-2" style="font-weight: 700!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;"></span>
+        <span id="title-section-1"
+            style="font-weight: 100!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;"></span>
+        <span id="title-section-2"
+            style="font-weight: 700!important; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;"></span>
     </h5>
     <TopListMenu />
 </nav>
 
 <style>
     #interface-app-bar {
-        height: 55px!important;
-        box-shadow: 0px 0px 5px 0px #000!important;
+        height: 55px !important;
+        box-shadow: 0px 0px 5px 0px #000 !important;
     }
+
     #interface-app-bar:has(#navbarNavDropdown.show) {
         height: auto !important;
     }
-    #interface-app-bar.navbar-light ~ .nav-link{
-        color: #000!important;
+
+    #interface-app-bar.navbar-light~.nav-link {
+        color: #000 !important;
     }
 </style>
