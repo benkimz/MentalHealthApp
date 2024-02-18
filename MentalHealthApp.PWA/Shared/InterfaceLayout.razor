@@ -1,22 +1,21 @@
 ﻿@inherits LayoutComponentBase
 
-<InterfaceAppBar/>
+<InterfaceAppBar />
 
-<main class="d-flex align-items-center justify-content-center flex-column" style="width: 100%!important; height: 100%!important; background: #fff!important;">
+<main class="d-flex align-items-center justify-content-center flex-column"
+    style="width: 100%!important; height: 100%!important; background: #fff!important;">
     @Body
 </main>
 
-<nav class="btm-nav navbar sticky-bottom navbar-light bg-light d-flex align-items-center" style="width: 100%!important;">
-    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4"
-         id="opt-share">
+<nav class="btm-nav navbar sticky-bottom navbar-light bg-light d-flex align-items-center"
+    style="width: 100%!important;">
+    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4" id="opt-share">
         <a href="#">Share this with a friend!</a>
     </div>
-    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4"
-         id="opt-read">
+    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4" id="opt-read">
         <a href="#">Bookworm? Checkout Dr. Parr's books!</a>
     </div>
-    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4"
-         id="opt-learn">
+    <div class="nav-options d-flex align-items-center justify-content-center col-md-4 col-lg-4" id="opt-learn">
         <a href="#">
             <em>Try Personalized Coaching</em>
         </a>
@@ -24,29 +23,37 @@
 </nav>
 
 <style>
-    .btm-nav{
-        padding: 0px!important;
-        background: #3498db!important; 
+    .btm-nav {
+        padding: 0px !important;
+        background: #3498db !important;
         height: 40px;
     }
-    .nav-options{
+
+    .nav-options {
         height: 100%;
     }
-    .nav-options > a{
+
+    .nav-options>a {
         text-decoration: none !important;
-        color: #fff!important;
+        color: #fff !important;
     }
-    #opt-share{
-        background: #97e7e0 !important;
+
+    #opt-share {
+        background: #A9D7CC !important;
         clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
     }
-    #opt-share > a {color: #000!important;}
-    #opt-read{
-        background: #275544 !important;
+
+    #opt-share>a {
+        color: #000 !important;
+    }
+
+    #opt-read {
+        background: #005468 !important;
         clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
     }
-    #opt-learn{
-        background: #133557!important;
+
+    #opt-learn {
+        background: #012D52 !important;
         clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
 </style>
