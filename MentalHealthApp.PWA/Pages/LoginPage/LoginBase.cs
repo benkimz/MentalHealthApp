@@ -24,25 +24,28 @@ namespace MentalHealthApp.PWA.Pages.LoginPage
         [Inject]
         public TokenManager? TokenManager { get; set; }
 
+        protected bool IsAuthenticating { get; set; }
+
         protected string? Email { get; set; }
 
-        protected string? Password { get; set; } 
+        protected string? Password { get; set; }
 
         protected string? ErrorMessage { get; set; }
 
         protected async void AuthenticateUser()
         {
-            if(_api is not null && _cookie is not null && _navManager is not null)
+            if (_api is not null && _cookie is not null && _navManager is not null)
             {
-                if(Email is not null && Password is not null)
+                if (Email is not null && Password is not null)
                 {
+                    IsAuthenticating = true; StateHasChanged();
                     LoginResponse? Log = await _api.SignInUser(email: Email, password: Password);
-                    if(Log is not null)
+                    if (Log is not null)
                     {
-                        if(Log.Success == true)
+                        if (Log.Success == true)
                         {
                             ErrorMessage = null;
-                            if(JSRuntime is not null)
+                            if (JSRuntime is not null)
                             {
                                 await JSRuntime.InvokeVoidAsync("BrowserData.SaveCookie", "token", Log.Token, 14);
                                 TokenManager.User = await _cookie.GetAppUser(Log.Token);
@@ -57,6 +60,7 @@ namespace MentalHealthApp.PWA.Pages.LoginPage
                     }
                 }
             }
+            IsAuthenticating = false; StateHasChanged();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
