@@ -29,7 +29,7 @@
                 {
                     <li class="nav-item">
                         <a class="nav-link active text-secondary fw-bold" aria-current="page"
-                            href="@($"history/{log?.VideoCategory.ToString().ToLower()}")">
+                            href="@($"history/{log?.VideoCategory.ToString().ToLower()}")" @onclick="StateHasChanged">
                             <i class="fa fa-paperclip m-3"></i>
                             @log?.VideoCategory.ToString() - @TokenManager.GetTimeElapsed(log?.CreatedDateTimeUTC ??
                     DateTime.UtcNow.AddYears(-1200))
