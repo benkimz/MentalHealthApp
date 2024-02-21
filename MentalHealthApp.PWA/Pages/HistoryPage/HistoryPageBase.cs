@@ -62,10 +62,14 @@ public class HistoryPageBase : ComponentBase
                     default: EmotionLogHistory = (await videoContentRepository.GetDefaultHistory(userId: TokenManager.User.Id.ToString()))?.ToList(); break;
                 }
             }
-
-
-
         }
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        StateHasChanged();
     }
 
 }
