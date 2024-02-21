@@ -2,18 +2,17 @@
 @using MentalHealthApp.PWA.Data.Context.Interfaces
 @using MentalHealthApp.PWA.Data.Context.Entities
 
-@inject IVideoContentRepository videoContentRepository
+@inject IVideoContentRepository VideoContentRepository
 @inject TokenManager TokenManager
 
 @code {
     private List<UserEmotionLog?>? EmotionLogHistory { get; set; }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var user = TokenManager.User;
         if (user != null)
         {
-            var results = await videoContentRepository.GetLastUserEmotionLogsPerCategory(user.Id.ToString());
+            var results = await VideoContentRepository.GetLastUserEmotionLogsPerCategory(user.Id.ToString());
             if (results is not null) EmotionLogHistory = results.ToList();
         }
         StateHasChanged();

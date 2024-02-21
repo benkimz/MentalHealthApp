@@ -23,7 +23,7 @@ public class HistoryPageBase : ComponentBase
 
     [Parameter]
     public string? category { get; set; }
-    protected List<Dictionary<UserEmotionLog, string>>? EmotionLogHistory { get; set; }
+    protected List<Dictionary<string, UserEmotionLog>>? EmotionLogHistory { get; set; }
 
     protected override void OnInitialized()
     {
@@ -36,39 +36,16 @@ public class HistoryPageBase : ComponentBase
             }
         }
     }
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     // if (videoContentRepository != null && TokenManager != null && category != null)
-    //     // {
-    //     //     if (TokenManager.User != null)
-    //     //     {
-    //     //         switch (category.Trim())
-    //     //         {
-    //     //             case "anger":
-    //     //                 EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Anger))?.ToList();
-    //     //                 break;
-    //     //             case "anxiety":
-    //     //                 EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Anxiety))?.ToList();
-    //     //                 break;
-    //     //             case "guilt":
-    //     //                 EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Guilt))?.ToList();
-    //     //                 break;
-    //     //             case "depression":
-    //     //                 EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Depression))?.ToList();
-    //     //                 break;
-    //     //             default: break;
-    //     //         }
-    //     //     }
-    //     //     StateHasChanged();
-    //     // }
-    // }
-    protected override async Task OnParametersSetAsync()
+
+    protected override async Task OnInitializedAsync()
     {
-        if (videoContentRepository != null && TokenManager != null && category != null)
+        await base.OnInitializedAsync();
+
+        if (videoContentRepository is not null && TokenManager is not null && TokenManager.User is not null)
         {
             if (TokenManager.User != null)
             {
-                switch (category.Trim())
+                switch (category?.Trim())
                 {
                     case "anger":
                         EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Anger))?.ToList();
@@ -82,42 +59,13 @@ public class HistoryPageBase : ComponentBase
                     case "depression":
                         EmotionLogHistory = (await videoContentRepository.GetUserEmotionLogsByCategory(userId: TokenManager.User.Id.ToString(), contentCategory: ContentCategory.Depression))?.ToList();
                         break;
-                    default: break;
+                    default: EmotionLogHistory = (await videoContentRepository.GetDefaultHistory(userId: TokenManager.User.Id.ToString()))?.ToList(); break;
                 }
             }
-            StateHasChanged();
+
+
+
         }
     }
-
-    // private long SecondsTimestamp(DateTime dateTime) => new DateTimeOffset(dateTime).ToUnixTimeSeconds();
-
-    // public string GetTimeElapsed(DateTime dateTime)
-    // {
-    //     long timestamp = SecondsTimestamp(dateTime);
-    //     long now = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-    //     long secondsElapsed = now - timestamp;
-
-    //     var intervals = new[]
-    //     {
-    //     new { Label = "year", Seconds = 31536000 },
-    //     new { Label = "month", Seconds = 2592000 },
-    //     new { Label = "week", Seconds = 604800 },
-    //     new { Label = "day", Seconds = 86400 },
-    //     new { Label = "hour", Seconds = 3600 },
-    //     new { Label = "minute", Seconds = 60 }
-    // };
-
-    //     foreach (var interval in intervals)
-    //     {
-    //         long elapsed = secondsElapsed / interval.Seconds;
-
-    //         if (elapsed >= 1)
-    //         {
-    //             return elapsed == 1 ? $"{elapsed} {interval.Label} ago" : $"{elapsed} {interval.Label}s ago";
-    //         }
-    //     }
-
-    //     return "Just now";
-    // }
 
 }

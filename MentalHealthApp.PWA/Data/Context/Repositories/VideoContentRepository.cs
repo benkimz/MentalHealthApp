@@ -64,20 +64,34 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
             return Task.FromResult(_context.UserEmotionLogs.Where(l => l.UserId == userId).OrderByDescending(h => h.CreatedDateTimeUTC).AsEnumerable() ?? null);
         }
 
-        public Task<List<Dictionary<UserEmotionLog, string>>?> GetUserEmotionLogsByCategory(string userId, ContentCategory contentCategory)
+        public Task<List<Dictionary<string, UserEmotionLog>>?> GetUserEmotionLogsByCategory(string userId, ContentCategory contentCategory)
         {
             var query = from el in _context.UserEmotionLogs.Where(q => q.UserId == userId && q.VideoCategory == contentCategory).OrderByDescending(h => h.CreatedDateTimeUTC)
                         join v in _context.Videos on el.VideoId equals v.Id
                         select new
                         {
-                            EmotionLog = el,
-                            Propmt = ExtractPrompt(v.TextPrompts, el.PromptKey)
+                            Prompt = ExtractPrompt(v.TextPrompts, el.PromptKey),
+                            EmotionLog = el
                         };
-            return Task.FromResult(query.Select(x => new Dictionary<UserEmotionLog, string> { { x.EmotionLog, x.Propmt } }).ToList() ?? null);
+            return Task.FromResult(query.Select(x => new Dictionary<string, UserEmotionLog> { { x.Prompt, x.EmotionLog } }).ToList() ?? null);
         }
         public Task<IEnumerable<UserEmotionLog?>?> GetLastUserEmotionLogsPerCategory(string userId)
         {
             return Task.FromResult(_context.UserEmotionLogs.Where(i => i.UserId == userId).GroupBy(l => l.VideoCategory).Select(g => g.OrderByDescending(l => l.CreatedDateTimeUTC).FirstOrDefault()).AsEnumerable() ?? null);
+        }
+
+        public Task<List<Dictionary<string, UserEmotionLog>>?> GetDefaultHistory(string userId)
+        {
+            var lastLog = _context.UserEmotionLogs.Where(l => l.UserId == userId).OrderByDescending(h => h.CreatedDateTimeUTC).FirstOrDefault();
+            if (lastLog is null) return Task.FromResult<List<Dictionary<string, UserEmotionLog>>?>(null);
+            var query = from el in _context.UserEmotionLogs.Where(q => q.UserId == userId && q.VideoCategory == lastLog.VideoCategory).OrderByDescending(h => h.CreatedDateTimeUTC)
+                        join v in _context.Videos on el.VideoId equals v.Id
+                        select new
+                        {
+                            EmotionLog = el,
+                            Prompt = ExtractPrompt(v.TextPrompts, el.PromptKey)
+                        };
+            return Task.FromResult(query.Select(x => new Dictionary<string, UserEmotionLog> { { x.Prompt, x.EmotionLog } }).ToList() ?? null);
         }
 
         public Task<UserEmotionLog?> UpdateEmotionLog(string userId, int logId, string content)
