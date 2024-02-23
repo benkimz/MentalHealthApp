@@ -23,13 +23,24 @@
 
                     <ContentTextBody TextBody="@targetContent?.Body" />
 
-                    @if (targetContent is not null)
+                    @* @if (targetContent is not null)
                     {
                         Dictionary<string, string> prompts = targetContent.Prompts();
                         foreach (var item in prompts)
                         {
-                            <UserInput Placeholder="@item.Value" PromptKey="@item.Key" OnSave="SaveUserLog"
-                                OnInput="EnterEmotionLog" />
+                            <UserInput Placeholder="@item.Value" VideoId="@targetContent.Id" PromptKey="@item.Key" OnSave="SaveUserLog"
+                                OnInput="EnterEmotionLog" ValueString = "@(GetUserLog(targetContent.Id, item.Key)?.Content)" />
+                        }
+                    } *@
+                    @{
+                        Dictionary<string, string>? prompts = targetContent?.Prompts();
+                        if(prompts is not null){
+                            foreach (var item in prompts)
+                            {
+                                var log = GetUserLog(targetContent?.Id ?? 0, item.Key)?.Content;
+                                <UserInput Placeholder="@item.Value" VideoId="@targetContent?.Id" PromptKey="@item.Key" OnSave="SaveUserLog"
+                                    OnInput="EnterEmotionLog" ValueString = "@log" />
+                            }
                         }
                     }
 

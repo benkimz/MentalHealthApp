@@ -56,8 +56,6 @@ namespace MentalHealthApp.PWA.Shared.ContentInterface
             base.OnInitialized();
 
             targetContent = Videos?.FirstOrDefault() ?? null;
-
-            // the user must be logged in
             if (CookieAccess != null && TokenManager != null && NavigationManager != null && MustSignIn == true)
             {
                 if (TokenManager.User == null)
@@ -102,10 +100,22 @@ namespace MentalHealthApp.PWA.Shared.ContentInterface
                 if (TokenManager.User != null && targetContent != null)
                 {
                     var userId = TokenManager.User.Id;
-                    await videoContentRepository.AddEmotionLog(userId: userId.ToString(), videoId: targetContent.Id, contentCategory: targetContent.Category, promptKey: promptKey, content: EmotionLogInput);
+                    await videoContentRepository.AddOrUpdateEmotionLog(userId: userId.ToString(), videoId: targetContent.Id, contentCategory: targetContent.Category, promptKey: promptKey, content: EmotionLogInput);
                 }
             }
             EmotionLogInput = string.Empty; StateHasChanged();
+        }
+        protected UserEmotionLog? GetUserLog(int videoId, string promptKey)
+        {
+            if (videoContentRepository != null && TokenManager != null)
+            {
+                if (TokenManager.User != null && targetContent != null)
+                {
+                    var userId = TokenManager.User.Id;
+                    return videoContentRepository?.GetLogByPromptKey(userId: userId.ToString(), videoId: videoId, promptKey: promptKey).GetAwaiter().GetResult();
+                }
+            }
+            return null;
         }
     }
 }

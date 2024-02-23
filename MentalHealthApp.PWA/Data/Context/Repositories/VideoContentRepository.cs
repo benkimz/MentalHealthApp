@@ -23,7 +23,6 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
 
         public async Task<UserEmotionLog?> AddEmotionLog(string userId, int videoId, ContentCategory contentCategory, string promptKey, string content)
         {
-            // Console.WriteLine($">>>> BACKEND: prompt: {promptKey}, user: {userId}, content: {content}, cat: {contentCategory.ToString()} video: {videoId}"); //////
             if (ValidString(promptKey) && ValidString(userId) && ValidString(content) && videoId > 0)
             {
                 UserEmotionLog log = new UserEmotionLog
@@ -42,6 +41,33 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
             return null;
         }
 
+        public Task<UserEmotionLog?> AddOrUpdateEmotionLog(string userId, int videoId, ContentCategory contentCategory, string promptKey, string content)
+        {
+            if (ValidString(promptKey) && ValidString(userId) && videoId > 0)
+            {
+                var log = _context.UserEmotionLogs.FirstOrDefault(l => l.UserId == userId && l.VideoId == videoId && l.VideoCategory == contentCategory && l.PromptKey == promptKey);
+                if (log is not null)
+                {
+                    if (string.IsNullOrEmpty(content) || string.IsNullOrWhiteSpace(content))
+                    {
+                        var res = _context.UserEmotionLogs.Remove(log);
+                        _context.SaveChanges();
+                        return Task.FromResult<UserEmotionLog?>(null);
+                    }
+                    log.Content = content;
+                    log.LastModifiedDateTimeUTC = DateTime.UtcNow;
+                    _context.SaveChanges();
+                    return Task.FromResult(log ?? null);
+                }
+                else
+                {
+                    return AddEmotionLog(userId, videoId, contentCategory, promptKey, content);
+                }
+            }
+            return Task.FromResult<UserEmotionLog?>(null);
+
+        }
+
         public Task<UserEmotionLog?> DeleteEmotionLog(int logId)
         {
             var log = _context.UserEmotionLogs.Find(logId);
@@ -58,7 +84,10 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
         {
             return Task.FromResult(_context.UserEmotionLogs.Find(logId) ?? null);
         }
-
+        public Task<UserEmotionLog?> GetLogByPromptKey(string userId, int videoId, string promptKey)
+        {
+            return Task.FromResult(_context.UserEmotionLogs.FirstOrDefault(l => l.UserId == userId && l.VideoId == videoId && l.PromptKey == promptKey) ?? null);
+        }
         public Task<IEnumerable<UserEmotionLog>?> GetUserEmotionLogs(string userId)
         {
             return Task.FromResult(_context.UserEmotionLogs.Where(l => l.UserId == userId).OrderByDescending(h => h.CreatedDateTimeUTC).AsEnumerable() ?? null);
@@ -215,5 +244,6 @@ namespace MentalHealthApp.PWA.Data.Context.Repositories
                 return null;
             }
         }
+
     }
 }

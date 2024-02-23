@@ -10,8 +10,11 @@ namespace MentalHealthApp.PWA.Data.Context.Interfaces
         Task<Video?> DeleteVideo(int videoId);
 
         Task<UserEmotionLog?> AddEmotionLog(string userId, int videoId, ContentCategory contentCategory, string promptKey, string content);
+        Task<UserEmotionLog?> AddOrUpdateEmotionLog(string userId, int videoId, ContentCategory contentCategory, string promptKey, string content);
         Task<UserEmotionLog?> DeleteEmotionLog(int logId);
         Task<UserEmotionLog?> GetEmotionLog(int logId);
+
+        Task<UserEmotionLog?> GetLogByPromptKey(string userId, int videoId, string promptKey);
         Task<IEnumerable<UserEmotionLog>?> GetUserEmotionLogs(string userId);
         Task<List<Dictionary<string, UserEmotionLog>>?> GetUserEmotionLogsByCategory(string userId, ContentCategory contentCategory);
         Task<IEnumerable<UserEmotionLog?>?> GetLastUserEmotionLogsPerCategory(string userId);

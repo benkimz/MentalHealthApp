@@ -1,14 +1,18 @@
 ﻿@inherits ContentInterface.BaseClasses.UserInputBase
 
+<style>
+    input {
+        height: 120px !important;
+        text-align: start !important;
+        word-break: break-word;
+    }
+</style>
+
 <div class="row" style="text-align: left!important; width: 100%!important;">
     <h6 style="margin: 0px!important;">Tap To Type</h6>
     <div class="content-body">
-        <button type="button" class="btn btn-link m-2 p-0" style="text-decoration: none!important;"
-            onclick="@(() => SaveEmotionLog())">
-            <i class="fa fa-save"></i> Save
-        </button>
-        <textarea
-            style="width: 100%!important; height: 120px!important; border-radius: 10px!important; border: none!important; outline: none!important;"
-            placeholder="@Placeholder" @bind="EmotionLog" @oninput="InputEmotionLog"></textarea>
+        <textarea name="@(DateTime.UtcNow.ToString("dd-mm-yyyy hh:ii tt"))" autocomplete="off" style="width: 100%!important; height: 120px!important; border-radius: 10px!important; border: none!important;
+        outline: none!important;" placeholder="@Placeholder" @bind="ValueString" @oninput="InputEmotionLog"
+            onblur="@(() => SaveEmotionLog())">@ValueString</textarea>
     </div>
 </div>
