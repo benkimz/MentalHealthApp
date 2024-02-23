@@ -14,8 +14,8 @@
     }
 </style>
 
-<header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow">
-    <a id="back-option" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href=""
+<header id="app-bar" class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow">
+    <a id="back-option" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" style="color: #fff!important;" href=""
         onclick="@(async () => await JSRuntime.InvokeVoidAsync("app.sounds.backButton.sonicFeedback"))">
         <i class="fas fa-arrow-left"></i> Go Back
     </a>
@@ -34,3 +34,13 @@
         </main>
     </div>
 </div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("app.theme.initializeAppTheme");
+        }
+    }
+}
